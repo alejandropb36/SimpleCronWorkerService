@@ -11,6 +11,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "samples", "samples", "{B57E
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WorkerServiceSample", "samples\WorkerServiceSample\WorkerServiceSample.csproj", "{1C5BC839-447E-4D8A-8CBA-D03E16C313B8}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApplicationApiSample", "samples\WebApplicationApiSample\WebApplicationApiSample.csproj", "{BFD2469A-CD3C-41C7-B793-3F403B3CCC0F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -25,6 +27,10 @@ Global
 		{1C5BC839-447E-4D8A-8CBA-D03E16C313B8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1C5BC839-447E-4D8A-8CBA-D03E16C313B8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1C5BC839-447E-4D8A-8CBA-D03E16C313B8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BFD2469A-CD3C-41C7-B793-3F403B3CCC0F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BFD2469A-CD3C-41C7-B793-3F403B3CCC0F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BFD2469A-CD3C-41C7-B793-3F403B3CCC0F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BFD2469A-CD3C-41C7-B793-3F403B3CCC0F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -32,6 +38,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{86A725F9-22BE-42FF-BED6-04C3289B6E42} = {7338F93B-43F4-460F-BF97-2D517EA8EDB8}
 		{1C5BC839-447E-4D8A-8CBA-D03E16C313B8} = {B57E11FB-1655-48C3-BCB5-F747C0A871AE}
+		{BFD2469A-CD3C-41C7-B793-3F403B3CCC0F} = {B57E11FB-1655-48C3-BCB5-F747C0A871AE}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {2190B6C6-FC82-4FB0-8EFB-C89BA55B0022}
