@@ -1,0 +1,32 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.4.33122.133
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleCronWorkerService", "src\SimpleCronWorkerService\SimpleCronWorkerService.csproj", "{86A725F9-22BE-42FF-BED6-04C3289B6E42}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{7338F93B-43F4-460F-BF97-2D517EA8EDB8}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "apps", "apps", "{B57E11FB-1655-48C3-BCB5-F747C0A871AE}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{86A725F9-22BE-42FF-BED6-04C3289B6E42}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{86A725F9-22BE-42FF-BED6-04C3289B6E42}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{86A725F9-22BE-42FF-BED6-04C3289B6E42}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{86A725F9-22BE-42FF-BED6-04C3289B6E42}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{86A725F9-22BE-42FF-BED6-04C3289B6E42} = {7338F93B-43F4-460F-BF97-2D517EA8EDB8}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {2190B6C6-FC82-4FB0-8EFB-C89BA55B0022}
+	EndGlobalSection
+EndGlobal
