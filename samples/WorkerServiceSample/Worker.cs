@@ -15,8 +15,6 @@ namespace WorkerServiceSample
         protected override Task DoWork(CancellationToken stoppingToken)
         {
             _logger.LogInformation("Running... at {0}", DateTime.UtcNow);
-            Thread.Sleep(60000);
-            _logger.LogInformation("End... at {0}", DateTime.UtcNow);
 
 
             return Task.CompletedTask;
