@@ -3,7 +3,7 @@ using System;
 
 namespace SimpleCronWorkerService
 {
-    public static class CronWorkerServiceExtensions
+    public static class ServiceCollectionExtension
     {
         public static IServiceCollection AddCronWorkerService<T>(this IServiceCollection services, Action<CronWorkerServiceSettings<T>> options)
         where T : CronWorkerService
