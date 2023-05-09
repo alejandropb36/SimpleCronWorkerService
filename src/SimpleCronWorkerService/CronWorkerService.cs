@@ -3,12 +3,13 @@ using Microsoft.Extensions.Hosting;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
+using Timer = System.Timers.Timer;
 
 namespace SimpleCronWorkerService
 {
     public abstract class CronWorkerService : BackgroundService
     {
-        private PeriodicTimer? _timer;
+        private Timer? _timer;
 
         private readonly CronExpression _cronExpression;
 
@@ -37,18 +38,22 @@ namespace SimpleCronWorkerService
                     return;
                 }
 
-                _timer = new PeriodicTimer(delay);
-                if (await _timer.WaitForNextTickAsync())
+                _timer = new Timer(delay.TotalMilliseconds);
+                _timer.Elapsed += async (sender, args) =>
                 {
                     _timer.Dispose();
                     _timer = null;
 
-                    var doWorktask = DoWork(cancellationToken);
+                    if (!cancellationToken.IsCancellationRequested)
+                    {
+                        var doWorkTask = DoWork(cancellationToken);
                     var executeTask = ExecuteAsync(cancellationToken);
 
-                    await doWorktask;
+                        await doWorkTask;
                     await executeTask;
                 }
+                };
+                _timer.Start();
             }
             catch (OperationCanceledException)
             {
