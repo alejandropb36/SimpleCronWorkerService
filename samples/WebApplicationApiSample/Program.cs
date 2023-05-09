@@ -6,8 +6,15 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddCronWorkerService<Worker>(options =>
 {
-    // Run every minute
-    options.CronExpression = "* * * * *";
+    // Run every second
+    options.CronExpression = @"@every_second";
+    options.TimeZone = TimeZoneInfo.Local;
+});
+
+builder.Services.AddCronWorkerService<Worker2>(options =>
+{
+    // Run every 2 minutes
+    options.CronExpression = @"*/2 * * * *";
     options.TimeZone = TimeZoneInfo.Local;
 });
 
