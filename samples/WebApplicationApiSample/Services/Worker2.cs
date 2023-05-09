@@ -7,7 +7,7 @@ namespace WebApplicationApiSample.Services
         private readonly ILogger<Worker2> _logger;
 
         public Worker2(CronWorkerServiceSettings<Worker2> cronWorkerServiceSettings, ILogger<Worker2> logger)
-            : base(cronWorkerServiceSettings.CronExpression, cronWorkerServiceSettings.TimeZone)
+            : base(cronWorkerServiceSettings)
         {
             _logger = logger;
         }

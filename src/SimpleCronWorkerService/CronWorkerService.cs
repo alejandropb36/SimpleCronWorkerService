@@ -16,9 +16,13 @@ namespace SimpleCronWorkerService
         private readonly TimeZoneInfo _timeZone;
 
         public CronWorkerService(string cronExpression, TimeZoneInfo? timeZone = null)
+        public CronWorkerService(ICronWorkerServiceSettings settings)
         {
-            _cronExpression = CronExpression.Parse(cronExpression);
-            _timeZone = timeZone ?? TimeZoneInfo.Utc;
+            _cronExpression = settings.CronExpressionIncludeSeconds
+                ? CronExpression.Parse(settings.CronExpression, CronFormat.IncludeSeconds)
+                : CronExpression.Parse(settings.CronExpression);
+
+            _timeZone = settings.TimeZone ?? TimeZoneInfo.Utc;
         }
 
         protected override async Task ExecuteAsync(CancellationToken cancellationToken)

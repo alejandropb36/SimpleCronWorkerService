@@ -8,7 +8,7 @@ namespace WebApplicationApiSample.Services
         private readonly SemaphoreSlim _semaphoreSlim;
 
         public WorkerWithSemaphore(CronWorkerServiceSettings<WorkerWithSemaphore> cronWorkerServiceSettings, ILogger<Worker> logger)
-            : base(cronWorkerServiceSettings.CronExpression, cronWorkerServiceSettings.TimeZone)
+            : base(cronWorkerServiceSettings)
         {
             _logger = logger;
             _semaphoreSlim = new SemaphoreSlim(1);
@@ -26,6 +26,8 @@ namespace WebApplicationApiSample.Services
             _logger.LogInformation("Running WorkerWithSemaphore Task:{0}... at {1}", guid, DateTime.UtcNow);
             await Task.Delay(5000);
             _logger.LogInformation("Finished WorkerWithSemaphore Task:{0}... at {1}", guid, DateTime.UtcNow);
+
+            _semaphoreSlim.Release();
         }
     }
 }
