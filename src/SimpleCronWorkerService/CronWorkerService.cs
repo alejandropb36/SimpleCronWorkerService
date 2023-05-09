@@ -15,7 +15,8 @@ namespace SimpleCronWorkerService
 
         private readonly TimeZoneInfo _timeZone;
 
-        public CronWorkerService(string cronExpression, TimeZoneInfo? timeZone = null)
+        private const int DelayMaxValueMilliseconds = (int.MaxValue - (10 * 1000));
+
         public CronWorkerService(ICronWorkerServiceSettings settings)
         {
             _cronExpression = settings.CronExpressionIncludeSeconds
@@ -36,7 +37,14 @@ namespace SimpleCronWorkerService
                 }
 
                 var delay = next.Value - DateTimeOffset.Now;
-                if (delay.TotalMilliseconds <= 0)
+
+                if (delay.TotalMilliseconds > int.MaxValue)
+                {
+                    await Task.Delay(DelayMaxValueMilliseconds);
+                    delay = next.Value - DateTimeOffset.Now;
+                }
+
+                if (delay.TotalMilliseconds <= 0 )
                 {
                     await ExecuteAsync(cancellationToken);
                     return;
@@ -51,11 +59,11 @@ namespace SimpleCronWorkerService
                     if (!cancellationToken.IsCancellationRequested)
                     {
                         var doWorkTask = DoWork(cancellationToken);
-                    var executeTask = ExecuteAsync(cancellationToken);
+                        var executeTask = ExecuteAsync(cancellationToken);
 
                         await doWorkTask;
-                    await executeTask;
-                }
+                        await executeTask;
+                    }
                 };
                 _timer.Start();
             }
