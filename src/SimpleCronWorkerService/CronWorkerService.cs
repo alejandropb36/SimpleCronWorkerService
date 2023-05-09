@@ -27,7 +27,6 @@ namespace SimpleCronWorkerService
                 var next = _cronExpression.GetNextOccurrence(DateTimeOffset.Now, _timeZone);
                 if (!next.HasValue)
                 {
-                    await ExecuteAsync(cancellationToken);
                     return;
                 }
 
