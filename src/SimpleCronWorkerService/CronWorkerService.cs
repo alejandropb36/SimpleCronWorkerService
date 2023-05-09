@@ -3,13 +3,12 @@ using Microsoft.Extensions.Hosting;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Timers;
 
 namespace SimpleCronWorkerService
 {
     public abstract class CronWorkerService : BackgroundService
     {
-        private PeriodicTimer? _periodicTimer;
+        private PeriodicTimer? _timer;
 
         private readonly CronExpression _cronExpression;
 
@@ -21,28 +20,44 @@ namespace SimpleCronWorkerService
             _timeZone = timeZone ?? TimeZoneInfo.Utc;
         }
 
-        protected override async Task ExecuteAsync(CancellationToken stoppingToken)
+        protected override async Task ExecuteAsync(CancellationToken cancellationToken)
         {
-            DateTimeOffset? nextOcurrence = _cronExpression.GetNextOccurrence(DateTimeOffset.UtcNow, _timeZone);
-
-            if (nextOcurrence.HasValue)
+            try
             {
-                var delay = nextOcurrence.Value - DateTimeOffset.UtcNow;
-                _periodicTimer = new PeriodicTimer(delay);
-
-                if (await _periodicTimer.WaitForNextTickAsync(stoppingToken))
+                var next = _cronExpression.GetNextOccurrence(DateTimeOffset.Now, _timeZone);
+                if (!next.HasValue)
                 {
-                    _periodicTimer.Dispose();
-                    _periodicTimer = null;
-
-                    await DoWork(stoppingToken);
-
-                    await ExecuteAsync(stoppingToken);
+                    await ExecuteAsync(cancellationToken);
+                    return;
                 }
+
+                var delay = next.Value - DateTimeOffset.Now;
+                if (delay.TotalMilliseconds <= 0)
+                {
+                    await ExecuteAsync(cancellationToken);
+                    return;
+                }
+
+                _timer = new PeriodicTimer(delay);
+                if (await _timer.WaitForNextTickAsync())
+                {
+                    _timer.Dispose();
+                    _timer = null;
+
+                    var doWorktask = DoWork(cancellationToken);
+                    var executeTask = ExecuteAsync(cancellationToken);
+
+                    await doWorktask;
+                    await executeTask;
+                }
+            }
+            catch (OperationCanceledException)
+            {
+                Console.WriteLine("CronWorkerService was cancelled");
             }
         }
 
-        protected abstract Task DoWork(CancellationToken stoppingToken);
+        protected abstract Task DoWork(CancellationToken cancellationToken);
 
     }
 }
