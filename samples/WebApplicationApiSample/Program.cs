@@ -18,6 +18,13 @@ builder.Services.AddCronWorkerService<Worker2>(options =>
     options.TimeZone = TimeZoneInfo.Local;
 });
 
+builder.Services.AddCronWorkerService<WorkerWithSemaphore>(options =>
+{
+    // Run every second
+    options.CronExpression = @"@every_second";
+    options.TimeZone = TimeZoneInfo.Local;
+});
+
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
