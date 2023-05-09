@@ -40,7 +40,7 @@ namespace SimpleCronWorkerService
 
                 if (delay.TotalMilliseconds > int.MaxValue)
                 {
-                    await Task.Delay(DelayMaxValueMilliseconds);
+                    await Task.Delay(DelayMaxValueMilliseconds, cancellationToken);
                     delay = next.Value - DateTimeOffset.Now;
                 }
 
@@ -71,6 +71,8 @@ namespace SimpleCronWorkerService
             {
                 Console.WriteLine("CronWorkerService was cancelled");
             }
+
+            await Task.CompletedTask;
         }
 
         protected abstract Task DoWork(CancellationToken cancellationToken);
