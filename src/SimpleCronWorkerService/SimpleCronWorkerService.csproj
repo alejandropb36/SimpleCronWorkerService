@@ -3,11 +3,31 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.1</TargetFramework>
     <Nullable>enable</Nullable>
+
+	<Title>SimpleCronWorkerService</Title>
+	<PackageId>SimpleCronWorkerService</PackageId>
+	<Version>0.0.1</Version>
+	<Authors>Alejandro Ponce</Authors>
+	<Copyright>Alejandro Ponce</Copyright>
+	<PackageLicenseFile>LICENSE</PackageLicenseFile>
+	<PackageTags>Cron;CronJob;Job;WorkerService;Worker;BackgroundJob;BackgroundService;BackgroundProcess;HostedService</PackageTags>
+	<PackageProjectUrl>https://github.com/alejandropb36/SimpleCronWorkerService</PackageProjectUrl>
+	<RepositoryUrl>https://github.com/alejandropb36/SimpleCronWorkerService</RepositoryUrl>
+	<Description>
+		A simple and easy way to implement worker services scheduled by a CRON expression
+	</Description>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="Cronos" Version="0.7.1" />
     <PackageReference Include="Microsoft.Extensions.Hosting" Version="6.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+	<None Include="..\LICENSE">
+	  <Pack>True</Pack>
+	  <PackagePath></PackagePath>
+    </None>
   </ItemGroup>
 
 </Project>
