@@ -1,0 +1,46 @@
+name: Release - Build, pack and publish NuGet
+on:
+  release:
+    types: [released]
+    tags:
+      - v*
+
+env:
+  NUGET_ORG_SERVER: 'https://api.nuget.org/v3/index.json'
+
+jobs:
+  build:
+    name: Build, pack and publish NuGet
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+      id-token: write
+    
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Set VERSION variable from release tag
+      run:  |
+        VERSION=$(echo "${{ github.ref }}" | sed -e 's#^refs/tags/v##')
+        echo "VERSION=${VERSION}" >> $GITHUB_ENV
+
+    - name: Setup .NET Core
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: 6.0.x
+
+    - name: Build with dotnet
+      run: dotnet build --configuration Release
+
+    - name: Publish with dotnet
+      run: dotnet publish --output artifacts/ --configuration Release
+
+    - name: Pack NuGet Package
+      run: dotnet pack --output artifacts/ -p:PackageVersion=${{ env.VERSION }} --configuration Release
+    
+    - name: Push package to NuGet Org
+      run: dotnet nuget push **/*.nupkg --api-key ${{ secrets.NUGET_ORG_KEY}} --source ${{ env.NUGET_ORG_SERVER }}
+
+    - name: Push package to NuGet GPR
+      run: dotnet nuget push **/*.nupkg --api-key --source "github"
