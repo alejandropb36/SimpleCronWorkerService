@@ -16,6 +16,7 @@
 	<Description>
 		A simple and easy way to implement worker services scheduled by a CRON expression
 	</Description>
+  <PackageReadmeFile>README.md</PackageReadmeFile>
   </PropertyGroup>
 
   <ItemGroup>
@@ -24,9 +25,13 @@
   </ItemGroup>
 
   <ItemGroup>
-	<None Include="..\..\LICENSE">
-	  <Pack>True</Pack>
-	  <PackagePath></PackagePath>
+	  <None Include="..\..\LICENSE">
+	    <Pack>True</Pack>
+	    <PackagePath></PackagePath>
+      </None>
+    <None Include="..\..\README.md">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
     </None>
   </ItemGroup>
 

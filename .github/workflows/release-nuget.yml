@@ -41,6 +41,3 @@ jobs:
     
     - name: Push package to NuGet Org
       run: dotnet nuget push **/*.nupkg --api-key ${{ secrets.NUGET_ORG_KEY}} --source ${{ env.NUGET_ORG_SERVER }}
-
-    - name: Push package to NuGet GPR
-      run: dotnet nuget push **/*.nupkg --api-key --source "github"
