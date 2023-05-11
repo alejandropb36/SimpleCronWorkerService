@@ -36,12 +36,12 @@ namespace SimpleCronWorkerService
                     return;
                 }
 
-                var delay = next.Value - DateTimeOffset.Now;
+                var delay = GetDelay(next.Value);
 
                 if (delay.TotalMilliseconds > int.MaxValue)
                 {
                     await Task.Delay(DelayMaxValueMilliseconds, cancellationToken);
-                    delay = next.Value - DateTimeOffset.Now;
+                    delay = GetDelay(next.Value);
                 }
 
                 if (delay.TotalMilliseconds <= 0 )
@@ -74,6 +74,8 @@ namespace SimpleCronWorkerService
 
             await Task.CompletedTask;
         }
+
+        private TimeSpan GetDelay(DateTimeOffset nextValue) => nextValue - DateTimeOffset.Now;
 
         protected abstract Task DoWork(CancellationToken cancellationToken);
 
