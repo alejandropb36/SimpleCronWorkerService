@@ -15,7 +15,7 @@ namespace SimpleCronWorkerService
 
         private readonly TimeZoneInfo _timeZone;
 
-        private const int DelayMaxValueMilliseconds = (int.MaxValue - (10 * 1000));
+        private const int DelayMaxValueMilliseconds = (int.MaxValue - (60 * 1000));
 
         public CronWorkerService(ICronWorkerServiceSettings settings)
         {
@@ -38,7 +38,11 @@ namespace SimpleCronWorkerService
 
                 var delay = GetDelay(next.Value);
 
-                if (delay.TotalMilliseconds > int.MaxValue)
+                // If it is a value greater than the MaxValue of Int,
+                // we have to wait for this difference to decrease.
+                // I wait for the same amount as MaxValue minus one minute and
+                // then validate again if it could be a valid value for the Timer.
+                while (delay.TotalMilliseconds > int.MaxValue)
                 {
                     await Task.Delay(DelayMaxValueMilliseconds, cancellationToken);
                     delay = GetDelay(next.Value);
