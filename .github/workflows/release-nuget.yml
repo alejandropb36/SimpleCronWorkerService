@@ -7,6 +7,7 @@ on:
 
 env:
   NUGET_ORG_SERVER: 'https://api.nuget.org/v3/index.json'
+  NUGET_GPR_SERVER: 'https://nuget.pkg.github.com/alejandropb36/index.json'
 
 jobs:
   build:
@@ -40,4 +41,7 @@ jobs:
       run: dotnet pack --output artifacts/ -p:PackageVersion=${{ env.VERSION }} --configuration Release
     
     - name: Push package to NuGet Org
-      run: dotnet nuget push **/*.nupkg --api-key ${{ secrets.NUGET_ORG_KEY}} --source ${{ env.NUGET_ORG_SERVER }}
+      run: dotnet nuget push **/*.nupkg --api-key ${{ secrets.NUGET_ORG_KEY }} --source ${{ env.NUGET_ORG_SERVER }}
+
+    - name: Push package to Github GPR
+      run: dotnet nuget push **/*.nupkg --api-key ${{ secrets.GITHUB_TOKEN }} --source ${{ env.NUGET_GPR_SERVER }}
