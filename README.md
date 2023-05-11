@@ -1,5 +1,7 @@
 # SimpleCronWorkerService
 
+[![NuGet](https://img.shields.io/nuget/v/SimpleCronWorkerService.svg)](https://www.nuget.org/packages/SimpleCronWorkerService)
+
 A simple and easy way to implement worker services scheduled by a CRON expression
 
 ## Getting started
