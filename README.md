@@ -1,6 +1,6 @@
 # SimpleCronWorkerService
 
-[![NuGet](https://img.shields.io/nuget/v/SimpleCronWorkerService.svg)](https://www.nuget.org/packages/SimpleCronWorkerService) [![Release - Build, pack and publish NuGet](https://github.com/alejandropb36/SimpleCronWorkerService/actions/workflows/release-nuget.yml/badge.svg)](https://github.com/alejandropb36/SimpleCronWorkerService/actions/workflows/release-nuget.yml)
+[![NuGet](https://img.shields.io/nuget/v/SimpleCronWorkerService.svg)](https://www.nuget.org/packages/SimpleCronWorkerService) [![Release - Build, pack and publish NuGet](https://github.com/alejandropb36/SimpleCronWorkerService/actions/workflows/release-nuget.yml/badge.svg)](https://github.com/alejandropb36/SimpleCronWorkerService/actions/workflows/release-nuget.yml) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://raw.githubusercontent.com/alejandropb36/SimpleCronWorkerService/main/LICENSE)
 
 A simple and easy way to implement worker services scheduled by a CRON expression
 
