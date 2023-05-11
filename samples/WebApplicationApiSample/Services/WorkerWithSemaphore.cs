@@ -23,9 +23,9 @@ namespace WebApplicationApiSample.Services
             }
 
             var guid = Guid.NewGuid();
-            _logger.LogInformation("Running WorkerWithSemaphore Task:{0}... at {1}", guid, DateTime.UtcNow);
+            _logger.LogInformation("Running WorkerWithSemaphore at {date} - Task:{guid}", DateTime.UtcNow, guid);
             await Task.Delay(5000);
-            _logger.LogInformation("Finished WorkerWithSemaphore Task:{0}... at {1}", guid, DateTime.UtcNow);
+            _logger.LogInformation("Finished WorkerWithSemaphore at {date} - Task:{guid}", DateTime.UtcNow, guid);
 
             _semaphoreSlim.Release();
         }

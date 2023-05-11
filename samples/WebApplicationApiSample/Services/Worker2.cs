@@ -14,8 +14,7 @@ namespace WebApplicationApiSample.Services
 
         protected override Task DoWork(CancellationToken stoppingToken)
         {
-            _logger.LogInformation("Running Worker2... at {0}", DateTime.UtcNow);
-
+            _logger.LogInformation("Running Worker2 at {date}", DateTime.UtcNow);
 
             return Task.CompletedTask;
         }
